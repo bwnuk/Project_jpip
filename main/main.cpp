@@ -7,40 +7,56 @@
 #include <stdlib.h>
 #include <string.h>
 #include <Windows.h>
+//#include <cstring>
 #define MAX_LINES 256
 
-
-char fucntion(char *tab, char lt, int num)
+//														Fucntion to eliminate character
+/*
+char fucntion(char *tab,  char lt, int num, int lg)
 {
-	char b;
-	while ((b = *tab) != '\0')
+	int i = 0;
+	int n = 0;
+	int x = 0;
+	char *b;
+
+	while ((b = tab[x]) != '\0')
 	{
 		if (b == lt)
 		{
-
+			if (n < num)
+			{
+				for (int x = i; x <= lg; x++)
+				{
+					x++;
+					b = tab[x];
+				}
+				n++;
+			}
 		}
 
-		tab++;
+		x++;
+		i++;
 	}
+	
+	return b;
 }
-
+*/
 int main()
 {
-	char d[MAX_LINES], *dd, letter;
+	char d[MAX_LINES], *dd, letter, b[MAX_LINES], symb;
 	int number = 0;
-	int lg;
+	int lg, n = 0, x = 0, k = 0;
 
 	printf("Give text: \n");
-
 	dd = gets(d);
-
+	
 	printf("Give letter to delete in the text: ");
-
 	scanf("%c", &letter);
 
 	//															Cleaning buffor
-	
 	while ((getchar()) != '\n');
+
+	//															Test if it's character
 
 	while( letter < 32 || letter > 126)
 	{
@@ -49,12 +65,14 @@ int main()
 		while ((getchar()) != '\n');
 	}
 
-
-
 	printf("Give number: ");
-
 	scanf("%d", &number);
+	
+	//															Cleaning buffor
+	
 	while ((getchar()) != '\n');
+
+	//															Test if it's number
 
 	while (number == 0)
 	{
@@ -63,14 +81,41 @@ int main()
 		while ((getchar()) != '\n');
 	}
 
+	//																Intput
+	system("cls");
 	printf("Text: %s \nLetter: %c \nNumber: %d \n", dd, letter, number);
 
 	lg = strlen(d);
 
-	fucntion(*dd, letter, number);
+	//b = fucntion(&dd,  letter, number, lg);
+	//printf("\nThe final text: %s\n\n", &b);
+	
+	while ((symb = dd[x]) != '\0')
+	{
+		if (symb == letter)
+		{
+			if (n < number)
+			{
+				n++;
+				x++;
+				continue;
+			}
+			else
+				b[k] = symb;
+		}
+		else
+			b[k] = symb;
+
+		x++;
+		k++;
+		
+	}
+	b[k] = '\0';
+	
+
+	printf("\nThe final text: %s\n\n", &b);
 
 	system("pause");
 
     return 0;
 }
-
