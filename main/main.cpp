@@ -94,14 +94,14 @@ int main()
 	while ((getchar()) != '\n');
 
 	//															Test if it's character
-
+	/*
 	while( letter < 32 || letter > 126)
 	{
 		printf("Give correct letter: ");
 		scanf("%c", &letter);
 		while ((getchar()) != '\n');
 	}
-
+	*/
 	printf("Give number: ");
 	scanf("%d", &number);
 	
