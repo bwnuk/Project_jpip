@@ -1,4 +1,5 @@
 // Programm in C
+// PROJECT number 30
 
 
 #include "stdafx.h"
@@ -9,47 +10,83 @@
 #include <Windows.h>
 //#include <cstring>
 #define MAX_LINES 256
+FILE *fr;
+FILE *fw;
+
+void error(int i)
+{
+	switch (i)
+	{
+	case 1:
+		printf("BLAD ODCZYTU PLIKU");
+		system("pause");
+		exit(1);
+		break;
+	case 2:
+		printf("BLAD PAMIECI");
+		system("pause");
+		exit(1);
+		break;
+	}
+}
 
 //														Fucntion to eliminate character
-/*
-char fucntion(char *tab,  char lt, int num, int lg)
+
+void fucntion(char *tab,  char lt, int num,  FILE *out, int *n)
 {
 	int i = 0;
-	int n = 0;
+	
 	int x = 0;
 	char *b;
+	char ot[MAX_LINES];
 
 	while ((b = tab[x]) != '\0')
 	{
 		if (b == lt)
 		{
-			if (n < num)
+			if (*n < num)
 			{
-				for (int x = i; x <= lg; x++)
-				{
-					x++;
-					b = tab[x];
-				}
-				n++;
+				x++;
+				*n++;
+				continue;
 			}
+			ot[i] = b;
 		}
+		else
+			ot[i] = b;
 
 		x++;
 		i++;
 	}
+	ot[i] = '\0';
 	
-	return b;
+	fprintf(out, "%s", ot);
+
 }
-*/
+
 int main()
 {
+	system("chcp 1250");
+
+
+	fr = fopen("input.txt", "r");
+	fw = fopen("output.txt", "w");
+
+	if (fr == NULL)
+	{
+		error(1);
+	}
+
 	char d[MAX_LINES], *dd, letter, b[MAX_LINES], symb;
 	int number = 0;
 	int lg, n = 0, x = 0, k = 0;
 
+	;
+	/*
 	printf("Give text: \n");
 	dd = gets(d);
-	
+	*/
+
 	printf("Give letter to delete in the text: ");
 	scanf("%c", &letter);
 
@@ -83,37 +120,18 @@ int main()
 
 	//																Intput
 	system("cls");
-	printf("Text: %s \nLetter: %c \nNumber: %d \n", dd, letter, number);
+	printf("Letter: %c \nNumber: %d \n", letter, number);
 
-	lg = strlen(d);
 
-	//b = fucntion(&dd,  letter, number, lg);
-	//printf("\nThe final text: %s\n\n", &b);
-	
-	while ((symb = dd[x]) != '\0')
+	while(fgets(d,MAX_LINES, fr)!=NULL)
 	{
-		if (symb == letter)
+		lg = strlen(d);
+		/*if (!(dd = (char *)malloc((unsigned)lg * sizeof(char))))
 		{
-			if (n < number)
-			{
-				n++;
-				x++;
-				continue;
-			}
-			else
-				b[k] = symb;
-		}
-		else
-			b[k] = symb;
-
-		x++;
-		k++;
-		
+			error(2);
+		}*/
+		fucntion(&d,  letter, number, fw, &n);
 	}
-	b[k] = '\0';
-	
-
-	printf("\nThe final text: %s\n\n", &b);
 
 	system("pause");
 
