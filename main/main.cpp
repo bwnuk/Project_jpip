@@ -47,7 +47,7 @@ void fucntion(char *tab,  char lt, int num,  FILE *out, int *n)
 			if (*n < num)
 			{
 				x++;
-				*n++;
+				*n = *n + 1;
 				continue;
 			}
 			ot[i] = b;
